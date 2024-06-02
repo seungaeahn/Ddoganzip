@@ -42,7 +42,7 @@ function InputField({disabled = false, error, touched, ...props}: InputFieldProp
           spellCheck={false}
           autoCorrect={false}
         />
-        {Boolean(error) && <Text style={styles.error}>{error}</Text>}
+        {touched && Boolean(error) && <Text style={styles.error}>{error}</Text>}
       </View>
     </Pressable>
   );
