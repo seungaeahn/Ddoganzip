@@ -8,10 +8,6 @@ import {
   Dimensions,
   View,
 } from 'react-native';
-<<<<<<< HEAD
-import {colors} from '@/constants';
-=======
->>>>>>> 63731db (Googlemap 연동)
 
 interface CustomButtonProps extends PressableProps {
   label: string;

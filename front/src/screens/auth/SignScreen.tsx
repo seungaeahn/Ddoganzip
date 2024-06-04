@@ -1,10 +1,6 @@
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 import InputField from '@/components/InputField';
-<<<<<<< HEAD
-
-=======
->>>>>>> 63731db (Googlemap 연동)
 import useForm from '@/hooks/useForm';
 import useAuth from '@/hooks/queries/useAuth';
 import {validateSignup} from '@/utils';
