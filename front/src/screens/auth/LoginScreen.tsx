@@ -1,10 +1,18 @@
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
+<<<<<<< HEAD
 import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButtons';
 import useForm from '@/hooks/useForm';
 import useAuth from '@/hooks/queries/useAuth';
 import {validateLogin} from '@/utils';
+=======
+import InputField from '../../components/InputField';
+import useAuth from '@/hooks/queries/useAuth';
+import {validateLogin} from '@/utils';
+import useForm from '@/hooks/useForm';
+import CustomButton from '@/components/CustomButtons';
+>>>>>>> 63731db (Googlemap 연동)
 
 function LoginScreen() {
   const {loginMutation} = useAuth();

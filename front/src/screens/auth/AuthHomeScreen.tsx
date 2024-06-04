@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import React from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Dimensions, Image, SafeAreaView, StyleSheet, View} from 'react-native';
 import {AuthStackParamList} from '@/navigations/stack/AuthStackNavigator';
 import CustomButton from '@/components/CustomButtons';
 import {authNaviagtions} from '@/constants/navigations';
+=======
+import CustomButton from '../../components/CustomButtons';
+import {authNaviagtions} from '../../constants';
+import {AuthStackParamList} from '@/navigations/stack/AuthStackNavigator';
+import {StackScreenProps} from '@react-navigation/stack';
+import React from 'react';
+import {Dimensions, Image, SafeAreaView, StyleSheet, View} from 'react-native';
+>>>>>>> 63731db (Googlemap 연동)
 
 type AuthHomeScreenProps = StackScreenProps<
   AuthStackParamList,
