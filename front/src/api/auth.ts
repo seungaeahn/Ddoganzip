@@ -1,20 +1,21 @@
-import axios from 'axios';
-import axiosInstance from './axios';
-import {Profile, Category} from '../../../server/src/types/domain';
+import {Category, Profile} from '../types/domain';
 import {getEncryptStorage} from '../utils';
+import axiosInstance from './axios';
 
 type RequestUser = {
   email: string;
   password: string;
 };
 
-const postSignUp = async ({email, password}: RequestUser): Promise<void> => {
-  const response = await axiosInstance.post('/auth/signup', {
+const postSignup = async ({email, password}: RequestUser): Promise<void> => {
+  const {data} = await axiosInstance.post('/auth/signup', {
     email,
     password,
   });
 
-  return response.data;
+  console.log(data);
+
+  return data;
 };
 
 type ResponseToken = {
@@ -26,36 +27,37 @@ const postLogin = async ({
   email,
   password,
 }: RequestUser): Promise<ResponseToken> => {
-  const response = await axiosInstance.post('/auth/signin', {
+  const {data} = await axiosInstance.post('/auth/signin', {
     email,
     password,
   });
 
-  return response.data;
+  return data;
 };
 
 type ResponseProfile = Profile & Category;
 
 const getProfile = async (): Promise<ResponseProfile> => {
-  const response = await axiosInstance.get('/auth/me');
+  const {data} = await axiosInstance.get('/auth/me');
 
-  return response.data;
+  return data;
 };
 
 const getAccessToken = async (): Promise<ResponseToken> => {
   const refreshToken = await getEncryptStorage('refreshToken');
-  const response = await axiosInstance.get('/auth/refresh', {
+
+  const {data} = await axiosInstance.get('/auth/refresh', {
     headers: {
-      Authorization: `Baerer ${refreshToken}`,
+      Authorization: `Bearer ${refreshToken}`,
     },
   });
 
-  return response.data;
+  return data;
 };
 
 const logout = async () => {
   await axiosInstance.post('/auth/logout');
 };
 
-export {postSignUp, postLogin, getProfile, getAccessToken, logout};
+export {postSignup, postLogin, getProfile, getAccessToken, logout};
 export type {RequestUser, ResponseToken, ResponseProfile};

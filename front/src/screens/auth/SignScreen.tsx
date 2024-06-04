@@ -1,20 +1,39 @@
 import React, {useRef} from 'react';
-import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 import InputField from '../../components/InputField';
+
 import useForm from '../../hooks/useForm';
+import useAuth from '../../hooks/queries/useAuth';
 import {validateSignup} from '../../utils';
 import CustomButton from '../../components/CustomButtons';
 
 function SignupScreen() {
   const passwordRef = useRef<TextInput | null>(null);
   const passwordConfirmRef = useRef<TextInput | null>(null);
+  const {signupMutation, loginMutation} = useAuth();
   const signup = useForm({
     initialValue: {email: '', password: '', passwordConfirm: ''},
     validate: validateSignup,
   });
 
   const handleSubmit = () => {
-    console.log('signup.values', signup.values);
+    const {email, password} = signup.values;
+    console.log('Signup Values:', signup.values);
+    signupMutation.mutate(
+      {email, password},
+      {
+        onSuccess: () => {
+          console.log('Signup Successful');
+          loginMutation.mutate({email, password});
+        },
+        onError: error => {
+          console.error(
+            'Signup Error:',
+            error.response ? error.response.data : error.message,
+          );
+        },
+      },
+    );
   };
 
   return (
@@ -49,6 +68,7 @@ function SignupScreen() {
           error={signup.errors.passwordConfirm}
           touched={signup.touched.passwordConfirm}
           secureTextEntry
+          returnKeyType="join"
           onSubmitEditing={handleSubmit}
           {...signup.getTextInputProps('passwordConfirm')}
         />
