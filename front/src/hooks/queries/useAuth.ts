@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {
+  ResponseProfile,
   getAccessToken,
   getProfile,
   logout,
@@ -70,7 +71,7 @@ function useGetRefreshToken() {
   return {isSuccess, isError};
 }
 
-function useGetProfile(queryOptions?: UseQueryCustomOptions) {
+function useGetProfile(queryOptions?: UseQueryCustomOptions<ResponseProfile>) {
   return useQuery({
     queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
     queryFn: getProfile,
