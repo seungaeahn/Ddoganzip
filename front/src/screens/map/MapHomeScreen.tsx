@@ -20,6 +20,8 @@ import usePermission from '@/hooks/usePermission';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import mapStyle from '@/style/mapStyle';
+import CustomButton from '@/components/CustomButtons';
+import CustomMarker from '@/components/customMarker';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,
@@ -71,15 +73,32 @@ function MapHomeScreen() {
         showsMyLocationButton={false}
         customMapStyle={mapStyle}
         onLongPress={handleLongPressMapView}>
-        <Marker
+        <CustomMarker
+          color="PINK"
           coordinate={{
             latitude: 37.5516032365118,
             longitude: 126.98989626020192,
           }}
         />
+        <CustomMarker
+          color="BLUE"
+          score={3}
+          coordinate={{
+            latitude: 36.5516032365118,
+            longitude: 126.98989626020192,
+          }}
+        />
+        <CustomMarker
+          color="PURPLE"
+          score={1}
+          coordinate={{
+            latitude: 35.5516032365118,
+            longitude: 126.98989626020192,
+          }}
+        />
         {selectLocation && (
           <Callout>
-            <Marker coordinate={selectLocation} />
+            <CustomMarker color="PINK" coordinate={selectLocation} />
           </Callout>
         )}
       </MapView>
