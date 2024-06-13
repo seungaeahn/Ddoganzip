@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {StyleSheet, Text, Pressable, View} from 'react-native';
+import {StyleSheet, Text, Pressable, View, Alert} from 'react-native';
 import useAuth from '@/hooks/queries/useAuth';
 import MapView, {
   Callout,
@@ -8,7 +8,7 @@ import MapView, {
   Marker,
   PROVIDER_GOOGLE,
 } from 'react-native-maps';
-import {colors} from '@/constants';
+import {alerts, colors, mapNavigations} from '@/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {MapStackParamList} from '@/navigations/stack/MapStackNavigator';
@@ -20,7 +20,6 @@ import usePermission from '@/hooks/usePermission';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import mapStyle from '@/style/mapStyle';
-import CustomButton from '@/components/CustomButtons';
 import CustomMarker from '@/components/customMarker';
 
 type Navigation = CompositeNavigationProp<
@@ -34,15 +33,24 @@ function MapHomeScreen() {
   const navigation = useNavigation<Navigation>();
   const mapRef = useRef<MapView | null>(null);
   const {userLocation, isUserLocationError} = useUserLocation();
-  const [selectLocation, setSelectLocation] = useState<LatLng>();
+  const [selectLocation, setSelectLocation] = useState<LatLng | null>();
   usePermission('LOCATION');
-
-  const handleLogout = () => {
-    logoutMutation.mutate(null);
-  };
 
   const handleLongPressMapView = ({nativeEvent}: LongPressEvent) => {
     setSelectLocation(nativeEvent.coordinate);
+  };
+
+  const handlePressAddPost = () => {
+    if (!selectLocation) {
+      return Alert.alert(
+        alerts.NOT_SELECTED_LOCATION.TITLE,
+        alerts.NOT_SELECTED_LOCATION.DESCRIPTION,
+      );
+    }
+    navigation.navigate(mapNavigations.ADD_POST, {
+      location: selectLocation,
+    });
+    setSelectLocation(null);
   };
 
   const handlePressUserLocation = () => {
@@ -98,7 +106,7 @@ function MapHomeScreen() {
         />
         {selectLocation && (
           <Callout>
-            <CustomMarker color="PINK" coordinate={selectLocation} />
+            <Marker coordinate={selectLocation} />
           </Callout>
         )}
       </MapView>
@@ -108,6 +116,9 @@ function MapHomeScreen() {
         <Ionicons name="menu" color={colors.WHITE} size={25} />
       </Pressable>
       <View style={styles.buttonList}>
+        <Pressable style={styles.mapButton} onPress={handlePressAddPost}>
+          <MaterialIcons name="add" color={colors.WHITE} size={25} />
+        </Pressable>
         <Pressable style={styles.mapButton} onPress={handlePressUserLocation}>
           <MaterialIcons name="my-location" color={colors.WHITE} size={25} />
         </Pressable>
