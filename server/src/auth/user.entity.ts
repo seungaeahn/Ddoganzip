@@ -38,10 +38,10 @@ export class User extends BaseEntity {
   kakaoImageUri?: string;
 
   @Column({ nullable: true, default: '' })
-  [MarkerColor.RED]: string;
+  [MarkerColor.PINK]: string;
 
   @Column({ nullable: true, default: '' })
-  [MarkerColor.YELLOW]: string;
+  [MarkerColor.ORANGE]: string;
 
   @Column({ nullable: true, default: '' })
   [MarkerColor.GREEN]: string;

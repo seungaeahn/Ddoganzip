@@ -168,20 +168,20 @@ export class AuthService {
     categories: Record<keyof MarkerColor, string>,
     user: User,
   ) {
-    const { RED, YELLOW, BLUE, GREEN, PURPLE } = MarkerColor;
+    const { PINK, BLUE, GREEN, ORANGE, PURPLE } = MarkerColor;
 
     if (
       !Object.keys(categories).every((color: MarkerColor) =>
-        [RED, YELLOW, BLUE, GREEN, PURPLE].includes(color),
+        [PINK, BLUE, GREEN, ORANGE, PURPLE].includes(color),
       )
     ) {
       throw new BadRequestException('유효하지 않은 카테고리입니다.');
     }
 
-    user[RED] = categories[RED];
-    user[YELLOW] = categories[YELLOW];
+    user[PINK] = categories[PINK];
     user[BLUE] = categories[BLUE];
     user[GREEN] = categories[GREEN];
+    user[ORANGE] = categories[ORANGE];
     user[PURPLE] = categories[PURPLE];
 
     try {
