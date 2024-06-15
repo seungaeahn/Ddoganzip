@@ -14,6 +14,7 @@ const colors = {
   PURPLE_400: '#8835F4',
   ORANGE_400: '#FF8453',
   WHITE_000: '#FFFFFF',
+  BLUE_500: '#0D8AFF',
 };
 
 export {colors};
