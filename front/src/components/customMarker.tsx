@@ -6,7 +6,7 @@ import {LatLng, Marker, MapMarkerProps} from 'react-native-maps';
 
 interface CustomMarkerProps extends MapMarkerProps {
   coordinate: LatLng;
-  color: keyof typeof colorHex;
+  color: MarkerColor;
   score?: number;
 }
 

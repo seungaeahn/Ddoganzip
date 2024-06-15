@@ -1,7 +1,7 @@
 export enum MarkerColor {
-  RED = 'RED',
+  PINK = 'PINK',
   BLUE = 'BLUE',
   GREEN = 'GREEN',
-  YELLOW = 'YELLOW',
+  ORANGE = 'ORANGE',
   PURPLE = 'PURPLE',
 }

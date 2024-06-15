@@ -1,4 +1,4 @@
-type MarkerColor = 'RED' | 'YELLOW' | 'GREEN' | 'BLUE' | 'PURPLE';
+type MarkerColor = 'PINK' | 'BLUE' | 'GREEN' | 'ORANGE' | 'PURPLE';
 
 type Category = {
   [key in MarkerColor]: string;
@@ -10,7 +10,7 @@ interface ImageUri {
 }
 
 interface Marker {
-  id: number;
+  id?: number;
   latitude: number;
   longitude: number;
   color: MarkerColor;
